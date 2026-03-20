@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: droproom
+    env: node
+    buildCommand: bun install && bun build
+    startCommand: bun start
+    envVars:
+      - key: CLOUDINARY_CLOUD_NAME
+        value: YOUR_CLOUD_NAME
+      - key: CLOUDINARY_API_KEY
+        value: "785721964931176"
+      - key: CLOUDINARY_API_SECRET
+        value: dgVPHq6y6xIW9v1p_P0ae9hjsBg

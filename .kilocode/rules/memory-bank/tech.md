@@ -112,15 +112,9 @@ bun typecheck      # Run TypeScript type checking
 
 ### Starting Point
 
-- SQLite database with Drizzle ORM added
+- Minimal structure - expand as needed
+- No database by default (use recipe to add)
 - No authentication by default (add when needed)
-
-### Database Commands
-
-```bash
-bun db:generate  # Generate migrations
-bun db:migrate   # Run migrations (sandbox only)
-```
 
 ### Browser Support
 
@@ -153,6 +147,6 @@ bun db:migrate   # Run migrations (sandbox only)
 
 ### Environment Variables
 
-- `DB_URL` - Database connection URL (provided by sandbox)
-- `DB_TOKEN` - Database auth token (provided by sandbox)
+- None required for base template
+- Add as needed for features
 - Use `.env.local` for local development
