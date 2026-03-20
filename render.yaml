@@ -2,7 +2,7 @@ services:
   - type: web
     name: droproom
     env: node
-    buildCommand: bun install && bun build
+    buildCommand: bun install && bun build && bun run db:push
     startCommand: bun start
     envVars:
       - key: CLOUDINARY_CLOUD_NAME
@@ -11,3 +11,9 @@ services:
         value: "785721964931176"
       - key: CLOUDINARY_API_SECRET
         value: dgVPHq6y6xIW9v1p_P0ae9hjsBg
+      - fromGroup: droproom-db
+
+databases:
+  - name: droproom-db
+    plan: free
+    databaseName: droproom
