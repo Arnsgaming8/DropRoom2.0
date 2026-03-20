@@ -49,9 +49,9 @@ export default function Sidebar({ isOpen, onToggle, currentRoomId }: SidebarProp
               <ul className="space-y-1 px-2">
                 {savedRooms.map((room) => (
                   <li key={room.roomId}>
-                    <button
+                    <div
                       onClick={() => handleNavigate(room.roomId)}
-                      className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-left transition-all duration-150 group ${
+                      className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-left transition-all duration-150 group cursor-pointer ${
                         currentRoomId === room.roomId
                           ? "bg-[var(--color-primary)]/20 text-[var(--color-primary-hover)]"
                           : "text-[var(--color-text-secondary)] hover:bg-[var(--color-surface-elevated)] hover:text-[var(--color-text-primary)]"
@@ -77,7 +77,7 @@ export default function Sidebar({ isOpen, onToggle, currentRoomId }: SidebarProp
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                         </svg>
                       </button>
-                    </button>
+                    </div>
                   </li>
                 ))}
               </ul>
