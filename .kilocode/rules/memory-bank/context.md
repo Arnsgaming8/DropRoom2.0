@@ -1,87 +1,69 @@
-# Active Context: Next.js Starter Template
+# Active Context: DropRoom - Anonymous File Sharing App
 
 ## Current State
 
-**Template Status**: ✅ Ready for development
+**Project Status**: ✅ Complete
 
-The template is a clean Next.js 16 starter with TypeScript and Tailwind CSS 4. It's ready for AI-assisted expansion to build any type of application.
+DropRoom is a fully functional anonymous room-based file sharing web app. It's built with Next.js 16 (static export), TailwindCSS 4, and Firebase (Firestore + Storage).
 
 ## Recently Completed
 
-- [x] Base Next.js 16 setup with App Router
-- [x] TypeScript configuration with strict mode
-- [x] Tailwind CSS 4 integration
-- [x] ESLint configuration
-- [x] Memory bank documentation
-- [x] Recipe system for common features
+- [x] Next.js 16 static export configuration for GitHub Pages
+- [x] Firebase Firestore integration for rooms and files
+- [x] Firebase Storage integration for file uploads
+- [x] Anonymous user identity with UUID stored in localStorage
+- [x] Room creation and management
+- [x] File upload with progress tracking
+- [x] File listing with open/download/delete functionality
+- [x] Delete permissions (only uploader can delete)
+- [x] Saved rooms sidebar with localStorage persistence
+- [x] Collapsible sidebar UI
+- [x] Modern dark theme UI
 
 ## Current Structure
 
 | File/Directory | Purpose | Status |
 |----------------|---------|--------|
-| `src/app/page.tsx` | Home page | ✅ Ready |
-| `src/app/layout.tsx` | Root layout | ✅ Ready |
-| `src/app/globals.css` | Global styles | ✅ Ready |
-| `.kilocode/` | AI context & recipes | ✅ Ready |
+| `src/lib/firebase.ts` | Firebase initialization | ✅ |
+| `src/lib/rooms.ts` | Room CRUD operations | ✅ |
+| `src/lib/files.ts` | File upload/list/delete | ✅ |
+| `src/lib/storage.ts` | localStorage utilities | ✅ |
+| `src/lib/room.ts` | Helper functions | ✅ |
+| `src/components/Header.tsx` | App header | ✅ |
+| `src/components/Sidebar.tsx` | Saved rooms sidebar | ✅ |
+| `src/components/UploadArea.tsx` | File upload area | ✅ |
+| `src/components/FileList.tsx` | File listing UI | ✅ |
+| `src/app/page.tsx` | Homepage | ✅ |
+| `src/app/room/[roomId]/page.tsx` | Room page server wrapper | ✅ |
+| `src/app/room/[roomId]/RoomClient.tsx` | Room page client component | ✅ |
+| `.env.example` | Firebase config template | ✅ |
+| `SPEC.md` | Full specification | ✅ |
 
-## Current Focus
+## Firebase Schema
 
-The template is ready. Next steps depend on user requirements:
+### Firestore Collections
+- `rooms/{roomId}` - Room metadata
+- `files/{fileId}` - File records with metadata
 
-1. What type of application to build
-2. What features are needed
-3. Design/branding preferences
+### Storage Structure
+- `files/{roomId}/{fileId}/{fileName}` - Uploaded files
 
-## Quick Start Guide
+## Deployment
 
-### To add a new page:
-
-Create a file at `src/app/[route]/page.tsx`:
-```tsx
-export default function NewPage() {
-  return <div>New page content</div>;
-}
-```
-
-### To add components:
-
-Create `src/components/` directory and add components:
-```tsx
-// src/components/ui/Button.tsx
-export function Button({ children }: { children: React.ReactNode }) {
-  return <button className="px-4 py-2 bg-blue-600 text-white rounded">{children}</button>;
-}
-```
-
-### To add a database:
-
-Follow `.kilocode/recipes/add-database.md`
-
-### To add API routes:
-
-Create `src/app/api/[route]/route.ts`:
-```tsx
-import { NextResponse } from "next/server";
-
-export async function GET() {
-  return NextResponse.json({ message: "Hello" });
-}
-```
-
-## Available Recipes
-
-| Recipe | File | Use Case |
-|--------|------|----------|
-| Add Database | `.kilocode/recipes/add-database.md` | Data persistence with Drizzle + SQLite |
-
-## Pending Improvements
-
-- [ ] Add more recipes (auth, email, etc.)
-- [ ] Add example components
-- [ ] Add testing setup recipe
+The app outputs to `out/` directory and is ready for GitHub Pages deployment. Configure Firebase environment variables in GitHub Secrets:
+- `NEXT_PUBLIC_FIREBASE_API_KEY`
+- `NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`
+- `NEXT_PUBLIC_FIREBASE_PROJECT_ID`
+- `NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET`
+- `NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID`
+- `NEXT_PUBLIC_FIREBASE_APP_ID`
 
 ## Session History
 
 | Date | Changes |
 |------|---------|
-| Initial | Template created with base setup |
+| 2026-03-20 | Complete DropRoom implementation |
+
+## Pending Improvements
+
+- [ ] CI/CD workflow for GitHub Pages deployment
