@@ -47,8 +47,8 @@ export default function UploadArea({ onUpload, uploading, progress }: UploadArea
     <div 
       className={`relative border-2 border-dashed rounded-xl p-8 transition-all duration-200 cursor-pointer ${
         isDragOver 
-          ? "border-[#6366f1] bg-[#6366f1]/10" 
-          : "border-[#2a2a3a] hover:border-[#6366f1]/50 hover:bg-[#1a1a24]"
+          ? "border-[var(--color-primary)] bg-[var(--color-primary)]/10" 
+          : "border-[var(--color-border)] hover:border-[var(--color-primary)]/50 hover:bg-[var(--color-surface-elevated)]"
       } ${uploading ? "pointer-events-none opacity-60" : ""}`}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
@@ -65,7 +65,7 @@ export default function UploadArea({ onUpload, uploading, progress }: UploadArea
       
       <div className="flex flex-col items-center gap-4 text-center">
         <div className={`w-16 h-16 rounded-full flex items-center justify-center transition-all duration-200 ${
-          isDragOver ? "bg-[#6366f1]/20 text-[#818cf8]" : "bg-[#1a1a24] text-[#64748b]"
+          isDragOver ? "bg-[var(--color-primary)]/20 text-[var(--color-primary-hover)]" : "bg-[var(--color-surface-elevated)] text-[var(--color-text-muted)]"
         }`}>
           <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
@@ -73,23 +73,23 @@ export default function UploadArea({ onUpload, uploading, progress }: UploadArea
         </div>
         
         <div>
-          <p className="text-[#f1f5f9] font-medium">
+          <p className="text-[var(--color-text-primary)] font-medium">
             {uploading ? "Uploading..." : "Drag & drop files here"}
           </p>
-          <p className="text-[#64748b] text-sm mt-1">
+          <p className="text-[var(--color-text-muted)] text-sm mt-1">
             or click to browse
           </p>
         </div>
         
         {uploading && (
           <div className="w-full max-w-xs mt-2">
-            <div className="h-2 bg-[#1a1a24] rounded-full overflow-hidden">
+            <div className="h-2 bg-[var(--color-surface-elevated)] rounded-full overflow-hidden">
               <div 
-                className="h-full bg-gradient-to-r from-[#6366f1] to-[#818cf8] transition-all duration-300"
+                className="h-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-hover)] transition-all duration-300"
                 style={{ width: `${progress}%` }}
               />
             </div>
-            <p className="text-[#64748b] text-xs mt-1 text-center">
+            <p className="text-[var(--color-text-muted)] text-xs mt-1 text-center">
               {Math.round(progress)}%
             </p>
           </div>

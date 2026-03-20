@@ -118,7 +118,7 @@ export function RoomClient({ params }: RoomClientProps) {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin w-8 h-8 border-2 border-[#6366f1] border-t-transparent rounded-full" />
+        <div className="animate-spin w-8 h-8 border-2 border-[var(--color-primary)] border-t-transparent rounded-full" />
       </div>
     );
   }
@@ -130,15 +130,15 @@ export function RoomClient({ params }: RoomClientProps) {
         <div className="pt-16 flex items-center justify-center min-h-screen">
           <div className="text-center px-4">
             <div className="text-6xl mb-4">🔍</div>
-            <h1 className="text-2xl font-bold text-[#f1f5f9] mb-2">
+            <h1 className="text-2xl font-bold text-[var(--color-text-primary)] mb-2">
               Room Not Found
             </h1>
-            <p className="text-[#64748b] mb-6">
+            <p className="text-[var(--color-text-muted)] mb-6">
               This room doesn&apos;t exist or may have been deleted.
             </p>
             <button
               onClick={() => router.push("/")}
-              className="px-6 py-2.5 rounded-lg bg-[#6366f1] text-white font-medium hover:bg-[#818cf8] transition-all duration-150"
+              className="px-6 py-2.5 rounded-lg bg-[var(--color-primary)] text-white font-medium hover:bg-[var(--color-primary-hover)] transition-all duration-150"
             >
               Go Home
             </button>
@@ -169,10 +169,10 @@ export function RoomClient({ params }: RoomClientProps) {
         <div className="max-w-4xl mx-auto px-4 py-8">
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h1 className="text-2xl font-bold text-[#f1f5f9]">
-                Room: <span className="font-mono text-[#22d3ee]">{roomId}</span>
+              <h1 className="text-2xl font-bold text-[var(--color-text-primary)]">
+                Room: <span className="font-mono text-[var(--color-accent)]">{roomId}</span>
               </h1>
-              <p className="text-[#64748b] text-sm mt-1">
+              <p className="text-[var(--color-text-muted)] text-sm mt-1">
                 Share this link to let others access the files
               </p>
             </div>
@@ -180,7 +180,7 @@ export function RoomClient({ params }: RoomClientProps) {
             <div className="flex items-center gap-2">
               <button
                 onClick={handleShareRoom}
-                className="px-4 py-2 rounded-lg bg-[#1a1a24] text-[#94a3b8] hover:text-[#f1f5f9] hover:bg-[#2a2a3a] transition-all duration-150 text-sm font-medium flex items-center gap-2"
+                className="px-4 py-2 rounded-lg bg-[var(--color-surface-elevated)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-border)] transition-all duration-150 text-sm font-medium flex items-center gap-2"
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
@@ -192,8 +192,8 @@ export function RoomClient({ params }: RoomClientProps) {
                 onClick={handleToggleSave}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-150 flex items-center gap-2 ${
                   isSaved 
-                    ? "bg-[#22c55e]/20 text-[#22c55e] hover:bg-[#22c55e]/30"
-                    : "bg-[#1a1a24] text-[#94a3b8] hover:text-[#f1f5f9] hover:bg-[#2a2a3a]"
+                    ? "bg-[var(--color-success)]/20 text-[var(--color-success)] hover:bg-[var(--color-success)]/30"
+                    : "bg-[var(--color-surface-elevated)] text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)] hover:bg-[var(--color-border)]"
                 }`}
               >
                 {isSaved ? (
@@ -223,7 +223,7 @@ export function RoomClient({ params }: RoomClientProps) {
             />
           </div>
           
-          <div className="bg-[#12121a] border border-[#2a2a3a] rounded-xl p-6">
+          <div className="bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl p-6">
             <FileList 
               files={files}
               currentUserId={currentUserId}

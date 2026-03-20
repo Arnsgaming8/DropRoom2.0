@@ -38,15 +38,15 @@ export default function HomePage() {
           <section className="flex-1 flex flex-col items-center justify-center px-4 py-20">
             <div className="max-w-2xl w-full text-center">
               <div className="mb-8">
-                <div className="inline-flex items-center justify-center w-24 h-24 rounded-2xl bg-gradient-to-br from-[#6366f1] to-[#818cf8] mb-6 shadow-lg shadow-[#6366f1]/20">
+                <div className="inline-flex items-center justify-center w-24 h-24 rounded-2xl bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-primary-hover)] mb-6 shadow-lg shadow-[var(--color-primary)]/20">
                   <span className="text-5xl">📦</span>
                 </div>
                 
-                <h1 className="text-5xl font-bold text-[#f1f5f9] mb-4">
+                <h1 className="text-5xl font-bold text-[var(--color-text-primary)] mb-4">
                   DropRoom
                 </h1>
                 
-                <p className="text-xl text-[#94a3b8] max-w-md mx-auto">
+                <p className="text-xl text-[var(--color-text-secondary)] max-w-md mx-auto">
                   Anonymous room-based file sharing. No accounts. No limits.
                 </p>
               </div>
@@ -54,7 +54,7 @@ export default function HomePage() {
               <button
                 onClick={handleCreateRoom}
                 disabled={creating}
-                className="px-8 py-4 rounded-xl bg-gradient-to-r from-[#6366f1] to-[#818cf8] text-white font-semibold text-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-150 shadow-lg shadow-[#6366f1]/25 hover:shadow-[#6366f1]/40"
+                className="px-8 py-4 rounded-xl bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-primary-hover)] text-white font-semibold text-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-150 shadow-lg shadow-[var(--color-primary)]/25 hover:shadow-[var(--color-primary)]/40"
               >
                 {creating ? (
                   <span className="flex items-center gap-2">
@@ -71,45 +71,45 @@ export default function HomePage() {
             </div>
           </section>
           
-          <section className="px-4 py-16 bg-[#12121a] border-t border-[#2a2a3a]">
+          <section className="px-4 py-16 bg-[var(--color-surface)] border-t border-[var(--color-border)]">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-2xl font-semibold text-center text-[#f1f5f9] mb-12">
+              <h2 className="text-2xl font-semibold text-center text-[var(--color-text-primary)] mb-12">
                 How It Works
               </h2>
               
               <div className="grid md:grid-cols-3 gap-8">
                 <div className="text-center">
-                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-[#1a1a24] mb-4">
+                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-[var(--color-surface-elevated)] mb-4">
                     <span className="text-2xl">1</span>
                   </div>
-                  <h3 className="text-lg font-semibold text-[#f1f5f9] mb-2">
+                  <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2">
                     Create a Room
                   </h3>
-                  <p className="text-[#64748b] text-sm">
+                  <p className="text-[var(--color-text-muted)] text-sm">
                     Click &quot;Create Room&quot; to generate a unique room link
                   </p>
                 </div>
                 
                 <div className="text-center">
-                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-[#1a1a24] mb-4">
+                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-[var(--color-surface-elevated)] mb-4">
                     <span className="text-2xl">2</span>
                   </div>
-                  <h3 className="text-lg font-semibold text-[#f1f5f9] mb-2">
+                  <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2">
                     Share Files
                   </h3>
-                  <p className="text-[#64748b] text-sm">
+                  <p className="text-[var(--color-text-muted)] text-sm">
                     Drag & drop or select files to upload instantly
                   </p>
                 </div>
                 
                 <div className="text-center">
-                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-[#1a1a24] mb-4">
+                  <div className="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-[var(--color-surface-elevated)] mb-4">
                     <span className="text-2xl">3</span>
                   </div>
-                  <h3 className="text-lg font-semibold text-[#f1f5f9] mb-2">
+                  <h3 className="text-lg font-semibold text-[var(--color-text-primary)] mb-2">
                     Share & Download
                   </h3>
-                  <p className="text-[#64748b] text-sm">
+                  <p className="text-[var(--color-text-muted)] text-sm">
                     Share the room link with anyone to access files
                   </p>
                 </div>
@@ -117,8 +117,8 @@ export default function HomePage() {
             </div>
           </section>
           
-          <footer className="px-4 py-6 border-t border-[#2a2a3a]">
-            <div className="max-w-4xl mx-auto text-center text-[#64748b] text-sm">
+          <footer className="px-4 py-6 border-t border-[var(--color-border)]">
+            <div className="max-w-4xl mx-auto text-center text-[var(--color-text-muted)] text-sm">
               <p>DropRoom - Anonymous file sharing, forever.</p>
             </div>
           </footer>
