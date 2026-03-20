@@ -20,6 +20,7 @@ DropRoom is a fully functional anonymous room-based file sharing web app. It's b
 - [x] Collapsible sidebar UI
 - [x] Modern dark theme UI
 - [x] SQLite database with Drizzle ORM
+- [x] Room creation using SQLite (replaced Firebase)
 
 ## Current Structure
 
@@ -55,6 +56,7 @@ DropRoom is a fully functional anonymous room-based file sharing web app. It's b
 
 ### SQLite Database (Drizzle ORM)
 - `users` table: id, name, email, createdAt
+- `rooms` table: id, roomId, createdAt
 
 ## Deployment
 
