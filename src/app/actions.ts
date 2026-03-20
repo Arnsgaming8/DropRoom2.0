@@ -6,6 +6,8 @@ import { eq } from "drizzle-orm";
 import { cloudinary } from "@/lib/cloudinary";
 
 export async function createRoom(roomId: string): Promise<void> {
+  console.log("Creating room:", roomId);
+  console.log("DB URL:", process.env.DATABASE_URL ? "set" : "NOT SET");
   await db.insert(rooms).values({ roomId });
 }
 
