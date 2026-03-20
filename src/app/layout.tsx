@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "@/components/Providers";
+import "@/db/init";
 
 export const metadata: Metadata = {
   title: "DropRoom - Anonymous File Sharing",
