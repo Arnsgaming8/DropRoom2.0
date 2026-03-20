@@ -12,6 +12,4 @@ services:
       - key: CLOUDINARY_API_SECRET
         value: dgVPHq6y6xIW9v1p_P0ae9hjsBg
       - key: DATABASE_URL
-        fromDatabase:
-          name: droproom
-          property: connectionString
+        value: dpg-d6uro024d50c73fbk2bg-a
