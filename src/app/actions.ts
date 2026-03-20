@@ -58,6 +58,8 @@ export async function uploadFile(
   
   const buffer = Buffer.from(fileData.data);
   
+  console.log("Uploading to Cloudinary, cloud:", cloudinary.config().cloud_name);
+  
   const result = await new Promise<{ secure_url: string; public_id: string }>((resolve, reject) => {
     const uploadStream = cloudinary.uploader.upload_stream(
       {
@@ -66,6 +68,7 @@ export async function uploadFile(
         folder: `droproom/${roomId}`,
       },
       (error, result) => {
+        console.log("Cloudinary error:", error);
         if (error) reject(error);
         else if (result) resolve(result as { secure_url: string; public_id: string });
         else reject(new Error("Upload failed"));
