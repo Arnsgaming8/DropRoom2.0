@@ -19,6 +19,7 @@ DropRoom is a fully functional anonymous room-based file sharing web app. It's b
 - [x] Saved rooms sidebar with localStorage persistence
 - [x] Collapsible sidebar UI
 - [x] Modern dark theme UI
+- [x] SQLite database with Drizzle ORM
 
 ## Current Structure
 
@@ -38,6 +39,10 @@ DropRoom is a fully functional anonymous room-based file sharing web app. It's b
 | `src/app/room/[roomId]/RoomClient.tsx` | Room page client component | ✅ |
 | `.env.example` | Firebase config template | ✅ |
 | `SPEC.md` | Full specification | ✅ |
+| `src/db/schema.ts` | Database schema (users table) | ✅ |
+| `src/db/index.ts` | Database client | ✅ |
+| `src/db/migrate.ts` | Migration runner | ✅ |
+| `drizzle.config.ts` | Drizzle configuration | ✅ |
 
 ## Firebase Schema
 
@@ -47,6 +52,9 @@ DropRoom is a fully functional anonymous room-based file sharing web app. It's b
 
 ### Storage Structure
 - `files/{roomId}/{fileId}/{fileName}` - Uploaded files
+
+### SQLite Database (Drizzle ORM)
+- `users` table: id, name, email, createdAt
 
 ## Deployment
 
@@ -63,6 +71,7 @@ The app outputs to `out/` directory and is ready for GitHub Pages deployment. Co
 | Date | Changes |
 |------|---------|
 | 2026-03-20 | Complete DropRoom implementation |
+| 2026-03-20 | Added SQLite database with Drizzle ORM |
 
 ## Pending Improvements
 
