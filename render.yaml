@@ -11,9 +11,7 @@ services:
         value: "785721964931176"
       - key: CLOUDINARY_API_SECRET
         value: dgVPHq6y6xIW9v1p_P0ae9hjsBg
-      - fromGroup: droproom-db
-
-databases:
-  - name: droproom-db
-    plan: free
-    databaseName: droproom
+      - key: DATABASE_URL
+        fromDatabase:
+          name: droproom
+          property: connectionString
