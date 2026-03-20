@@ -12,5 +12,4 @@ services:
       - key: CLOUDINARY_API_SECRET
         value: dgVPHq6y6xIW9v1p_P0ae9hjsBg
       - key: DATABASE_URL
-        sync: false
-        value: dpg-d6uro024d50c73fbk2bg-a
+        value: postgresql://droproom_user:AyLFCNdT5bAg7e5HLynq1snDnOBimkbL@dpg-d6uro024d50c73fbk2bg-a/droproom
