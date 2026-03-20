@@ -6,7 +6,7 @@ services:
     startCommand: bun start
     envVars:
       - key: CLOUDINARY_CLOUD_NAME
-        value: YOUR_CLOUD_NAME
+        value: dxtujnsmb
       - key: CLOUDINARY_API_KEY
         value: "785721964931176"
       - key: CLOUDINARY_API_SECRET
