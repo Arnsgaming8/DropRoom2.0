@@ -66,6 +66,8 @@ export async function uploadFile(
         public_id: publicId,
         resource_type: "auto",
         folder: `droproom/${roomId}`,
+        unsigned: true,
+        upload_preset: "droproom_unsigned",
       },
       (error, result) => {
         console.log("Cloudinary error:", error);
