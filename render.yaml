@@ -2,7 +2,7 @@ services:
   - type: web
     name: droproom
     env: node
-    buildCommand: bun install && bun build && bun run db:push
+    buildCommand: bun install && bun build
     startCommand: bun start
     envVars:
       - key: CLOUDINARY_CLOUD_NAME
