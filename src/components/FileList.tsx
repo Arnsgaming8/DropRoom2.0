@@ -1,11 +1,12 @@
 "use client";
 
-import { FileRecord, formatFileSize, getFileIcon } from "@/lib";
+import { formatFileSize, getFileIcon } from "@/lib";
+import { FileRecord as FileRecordServer } from "@/app/actions";
 
 interface FileListProps {
-  files: FileRecord[];
+  files: FileRecordServer[];
   currentUserId: string;
-  onDelete: (file: FileRecord) => Promise<void>;
+  onDelete: (file: FileRecordServer) => Promise<void>;
   deleting: string | null;
 }
 
@@ -14,7 +15,7 @@ export default function FileList({ files, currentUserId, onDelete, deleting }: F
     window.open(url, "_blank");
   };
   
-  const handleDownload = (file: FileRecord) => {
+  const handleDownload = (file: FileRecordServer) => {
     const link = document.createElement("a");
     link.href = file.fileUrl;
     link.download = file.fileName;

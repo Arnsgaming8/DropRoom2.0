@@ -8,12 +8,14 @@ import {
   saveRoom, 
   removeRoom, 
   isRoomSaved,
-  uploadFile, 
-  getFilesByRoom, 
-  deleteFile,
-  FileRecord,
   roomExists 
 } from "@/lib";
+import { 
+  uploadFile as uploadFileAction, 
+  getFilesByRoom as getFilesByRoomAction, 
+  deleteFile as deleteFileAction,
+  FileRecord as FileRecordServer
+} from "@/app/actions";
 
 interface RoomClientProps {
   params: Promise<{ roomId: string }>;
@@ -26,7 +28,7 @@ export function RoomClient({ params }: RoomClientProps) {
   
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [currentUserId, setCurrentUserId] = useState("");
-  const [files, setFiles] = useState<FileRecord[]>([]);
+  const [files, setFiles] = useState<FileRecordServer[]>([]);
   const [loading, setLoading] = useState(true);
   const [roomValid, setRoomValid] = useState(true);
   const [uploading, setUploading] = useState(false);
@@ -44,7 +46,7 @@ export function RoomClient({ params }: RoomClientProps) {
       if (!exists) {
         setRoomValid(false);
       } else {
-        const roomFiles = await getFilesByRoom(roomId);
+        const roomFiles = await getFilesByRoomAction(roomId);
         setFiles(roomFiles);
       }
       setLoading(false);
@@ -65,17 +67,18 @@ export function RoomClient({ params }: RoomClientProps) {
         const progressPerFile = 100 / fileArray.length;
         const baseProgress = i * progressPerFile;
         
-        await uploadFile(
+        const arrayBuffer = await file.arrayBuffer();
+        
+        await uploadFileAction(
           roomId,
-          file,
-          currentUserId,
-          (progress) => {
-            setUploadProgress(baseProgress + (progress / fileArray.length));
-          }
+          { name: file.name, type: file.type, size: file.size, data: arrayBuffer },
+          currentUserId
         );
+        
+        setUploadProgress(baseProgress + progressPerFile);
       }
       
-      const updatedFiles = await getFilesByRoom(roomId);
+      const updatedFiles = await getFilesByRoomAction(roomId);
       setFiles(updatedFiles);
     } catch (error) {
       console.error("Upload failed:", error);
@@ -85,13 +88,13 @@ export function RoomClient({ params }: RoomClientProps) {
     }
   };
   
-  const handleDelete = async (file: FileRecord) => {
+  const handleDelete = async (file: FileRecordServer) => {
     if (file.uploaderId !== currentUserId) return;
     
     setDeleting(file.fileId);
     try {
-      await deleteFile(file);
-      const updatedFiles = await getFilesByRoom(roomId);
+      await deleteFileAction(file.fileId, currentUserId);
+      const updatedFiles = await getFilesByRoomAction(roomId);
       setFiles(updatedFiles);
     } catch (error) {
       console.error("Delete failed:", error);

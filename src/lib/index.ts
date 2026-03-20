@@ -1,5 +1,5 @@
 export * from "./firebase";
 export * from "./rooms";
-export * from "./files";
+export { formatFileSize, getFileIcon, generateRoomId } from "./room";
 export * from "./storage";
-export * from "./room";
+export type { FileRecord as FileRecordServer } from "@/app/actions";
