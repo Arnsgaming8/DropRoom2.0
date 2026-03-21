@@ -5,12 +5,6 @@ services:
     buildCommand: bun install && bun build
     startCommand: bun start
     envVars:
-      - key: CLOUDINARY_CLOUD_NAME
-        value: dxtujnsmb
-      - key: CLOUDINARY_API_KEY
-        value: "785721964931176"
-      - key: CLOUDINARY_API_SECRET
-        value: dgVPHq6y6xIW9v1p_P0ae9hjsBg
       - key: DATABASE_URL
         value: postgresql://droproom_user:AyLFCNdT5bAg7e5HLynq1snDnOBimkbL@dpg-d6uro024d50c73fbk2bg-a/droproom
       - key: POSTGRES_URL
