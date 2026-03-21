@@ -3,7 +3,7 @@
 import { db } from "@/db";
 import { rooms, files } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { cloudinary } from "@/lib/cloudinary";
+import { uploadToDiscord, deleteFromDiscord } from "@/lib/discord";
 
 export async function createRoom(roomId: string): Promise<void> {
   console.log("Creating room:", roomId);
@@ -53,17 +53,16 @@ export async function uploadFile(
   uploaderId: string
 ): Promise<FileRecord> {
   const fileId = generateFileId();
-  const publicId = `droproom/${roomId}/${fileId}`;
   
-  const base64 = Buffer.from(fileData.data).toString("base64");
+  const buffer = Buffer.from(fileData.data);
   
-  const result = await cloudinary.uploader.upload(`data:${fileData.type};base64,${base64}`, {
-    public_id: `${roomId}/${fileId}`,
-    resource_type: "auto",
-    folder: "droproom",
-    unsigned: true,
-    upload_preset: "droproom",
-  });
+  console.log("Uploading to Discord...");
+  
+  const result = await uploadToDiscord(buffer, fileData.name, fileData.type);
+  
+  if (!result) {
+    throw new Error("Failed to upload to Discord");
+  }
 
   const fileRecord: FileRecord = {
     fileId,
@@ -72,7 +71,7 @@ export async function uploadFile(
     fileName: fileData.name,
     fileSize: fileData.size,
     fileType: fileData.type,
-    fileUrl: result.secure_url,
+    fileUrl: result.url,
     createdAt: new Date(),
   };
 
@@ -84,7 +83,7 @@ export async function uploadFile(
     fileSize: fileRecord.fileSize,
     fileType: fileRecord.fileType,
     fileUrl: fileRecord.fileUrl,
-    publicId: result.public_id,
+    publicId: result.attachmentId,
   });
 
   return fileRecord;
@@ -116,11 +115,10 @@ export async function deleteFile(fileId: string, uploaderId: string): Promise<vo
     throw new Error("Not authorized to delete this file");
   }
 
-  console.log("Deleting from Cloudinary:", file.publicId);
   try {
-    await cloudinary.uploader.destroy(file.publicId);
+    await deleteFromDiscord(file.publicId);
   } catch (e) {
-    console.log("Cloudinary delete error:", e);
+    console.log("Discord delete error:", e);
   }
   
   await db.delete(files).where(eq(files.fileId, fileId));
