@@ -58,9 +58,9 @@ export async function uploadFile(
   const base64 = Buffer.from(fileData.data).toString("base64");
   
   const result = await cloudinary.uploader.upload(`data:${fileData.type};base64,${base64}`, {
-    public_id: publicId,
+    public_id: `${roomId}/${fileId}`,
     resource_type: "auto",
-    folder: `droproom/${roomId}`,
+    folder: "droproom",
     unsigned: true,
     upload_preset: "droproom",
   });
