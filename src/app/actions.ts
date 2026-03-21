@@ -56,23 +56,14 @@ export async function uploadFile(
   const fileId = generateFileId();
   const publicId = `droproom/${roomId}/${fileId}`;
   
-  const buffer = Buffer.from(fileData.data);
+  const base64 = Buffer.from(fileData.data).toString("base64");
   
   console.log("Uploading to Cloudinary, cloud:", cloudinary.config().cloud_name);
   
-  const result = await cloudinary.uploader.upload(`data:${fileData.type};base64,${Buffer.from(fileData.data).toString("base64")}`, {
+  const result = await cloudinary.uploader.upload(`data:${fileData.type};base64,${base64}`, {
     public_id: publicId,
     resource_type: "auto",
     folder: `droproom/${roomId}`,
-  });
-      (error, result) => {
-        console.log("Cloudinary error:", error);
-        if (error) reject(error);
-        else if (result) resolve(result as { secure_url: string; public_id: string });
-        else reject(new Error("Upload failed"));
-      }
-    );
-    uploadStream.end(buffer);
   });
 
   const fileRecord: FileRecord = {
