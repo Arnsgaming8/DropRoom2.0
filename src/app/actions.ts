@@ -3,7 +3,7 @@
 import { db } from "@/db";
 import { rooms, files } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { uploadToDiscord, deleteFromDiscord } from "@/lib/discord";
+import { uploadFile as uploadToServer, deleteFile as deleteFromServer } from "@/lib/upload";
 
 export async function createRoom(roomId: string): Promise<void> {
   console.log("Creating room:", roomId);
@@ -56,13 +56,9 @@ export async function uploadFile(
   
   const buffer = Buffer.from(fileData.data);
   
-  console.log("Uploading to Discord...");
+  console.log("Uploading file...");
   
-  const result = await uploadToDiscord(buffer, fileData.name, fileData.type);
-  
-  if (!result) {
-    throw new Error("Failed to upload to Discord");
-  }
+  const result = await uploadToServer(buffer, fileData.name, fileData.type);
 
   const fileRecord: FileRecord = {
     fileId,
@@ -83,7 +79,7 @@ export async function uploadFile(
     fileSize: fileRecord.fileSize,
     fileType: fileRecord.fileType,
     fileUrl: fileRecord.fileUrl,
-    publicId: result.attachmentId,
+    publicId: result.deleteUrl,
   });
 
   return fileRecord;
@@ -116,9 +112,9 @@ export async function deleteFile(fileId: string, uploaderId: string): Promise<vo
   }
 
   try {
-    await deleteFromDiscord(file.publicId);
+    await deleteFromServer(file.fileUrl);
   } catch (e) {
-    console.log("Discord delete error:", e);
+    console.log("Delete error:", e);
   }
   
   await db.delete(files).where(eq(files.fileId, fileId));
