@@ -7,7 +7,13 @@ import { uploadToDiscord, deleteFromDiscord } from "@/lib/discord";
 
 export async function createRoom(roomId: string): Promise<void> {
   console.log("Creating room:", roomId);
-  await db.insert(rooms).values({ roomId });
+  try {
+    await db.insert(rooms).values({ roomId });
+    console.log("Room created successfully:", roomId);
+  } catch (error) {
+    console.error("Error creating room:", error);
+    throw error;
+  }
 }
 
 export async function roomExists(roomId: string): Promise<boolean> {
