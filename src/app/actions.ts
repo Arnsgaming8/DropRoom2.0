@@ -60,15 +60,11 @@ export async function uploadFile(
   
   console.log("Uploading to Cloudinary, cloud:", cloudinary.config().cloud_name);
   
-  const result = await new Promise<{ secure_url: string; public_id: string }>((resolve, reject) => {
-    const uploadStream = cloudinary.uploader.upload_stream(
-      {
-        public_id: publicId,
-        resource_type: "auto",
-        folder: `droproom/${roomId}`,
-        unsigned: true,
-        upload_preset: "droproom_unsigned",
-      },
+  const result = await cloudinary.uploader.upload(`data:${fileData.type};base64,${Buffer.from(fileData.data).toString("base64")}`, {
+    public_id: publicId,
+    resource_type: "auto",
+    folder: `droproom/${roomId}`,
+  });
       (error, result) => {
         console.log("Cloudinary error:", error);
         if (error) reject(error);
