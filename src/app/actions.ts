@@ -7,7 +7,6 @@ import { cloudinary } from "@/lib/cloudinary";
 
 export async function createRoom(roomId: string): Promise<void> {
   console.log("Creating room:", roomId);
-  console.log("DB URL:", process.env.DATABASE_URL ? "set" : "NOT SET");
   await db.insert(rooms).values({ roomId });
 }
 
@@ -58,12 +57,12 @@ export async function uploadFile(
   
   const base64 = Buffer.from(fileData.data).toString("base64");
   
-  console.log("Uploading to Cloudinary, cloud:", cloudinary.config().cloud_name);
-  
   const result = await cloudinary.uploader.upload(`data:${fileData.type};base64,${base64}`, {
     public_id: publicId,
     resource_type: "auto",
     folder: `droproom/${roomId}`,
+    unsigned: true,
+    upload_preset: "droproom",
   });
 
   const fileRecord: FileRecord = {
