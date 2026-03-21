@@ -97,22 +97,31 @@ export async function getFilesByRoom(roomId: string): Promise<FileRecord[]> {
     roomId: f.roomId,
     uploaderId: f.uploaderId,
     fileName: f.fileName,
-    fileSize: f.fileSize,
+    fileSize: Number(f.fileSize),
     fileType: f.fileType,
     fileUrl: f.fileUrl,
-    createdAt: f.createdAt || new Date(),
+    createdAt: f.createdAt ? new Date(f.createdAt) : new Date(),
   }));
 }
 
 export async function deleteFile(fileId: string, uploaderId: string): Promise<void> {
   const result = await db.select().from(files).where(eq(files.fileId, fileId));
-  if (result.length === 0) return;
+  if (result.length === 0) {
+    console.log("File not found:", fileId);
+    return;
+  }
   
   const file = result[0];
   if (file.uploaderId !== uploaderId) {
     throw new Error("Not authorized to delete this file");
   }
 
-  await cloudinary.uploader.destroy(file.publicId);
+  console.log("Deleting from Cloudinary:", file.publicId);
+  try {
+    await cloudinary.uploader.destroy(file.publicId);
+  } catch (e) {
+    console.log("Cloudinary delete error:", e);
+  }
+  
   await db.delete(files).where(eq(files.fileId, fileId));
 }
