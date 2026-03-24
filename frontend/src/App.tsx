@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
-import { createRoomDemo, createRoom, Room, DEMO_MODE } from '../lib/api';
+import { createRoomDemo, createRoom, Room, DEMO_MODE } from './lib/api';
 import { RoomPage } from './pages/RoomPage';
 
 function HomePage() {
