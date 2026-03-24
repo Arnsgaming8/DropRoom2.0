@@ -1,0 +1,6 @@
+backend/
+infra/
+.github/
+.gitignore
+README.md
+vercel.json
